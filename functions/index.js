@@ -24,7 +24,7 @@ app.use(cors());
 
 app.get("/obtener", async (req, res) => {
   logger.info("Hello logs!", {structuredData: true});
-  res.send({message: "Listando correctamente"});
+  res.send({message: "Cambiando mensaje"});
 });
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
