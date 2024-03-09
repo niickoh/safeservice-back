@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(cors());
 const sendMail = require("./lib/utils");
 
-app.get("/obtener", async (req, res) => {
+app.post("/crear-contacto", async (req, res) => {
   logger.info("Hello logs!", {structuredData: true});
   const data = req.body.datosRegistro;
   const contactoAdd = await getFirestore()
