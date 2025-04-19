@@ -27,14 +27,22 @@ const sendMail = require("./lib/utils");
 
 app.post("/crear-contacto", async (req, res) => {
   logger.info("Hello logs!", {structuredData: true});
-  const data = req.body.datosRegistro;
+  logger.info("BODY!!", req.body);
+  console.log("req.body", req.body);
+  const data = JSON.parse(JSON.stringify(req.body)).datosRegistro;
   const contactoAdd = await getFirestore()
       .collection("Users")
       .add(data);
   // eslint-disable-next-line max-len
-  const file = fs.readFileSync(resolve("templates/inicio-temporada.html"), "utf-8");
-  const body = req.body.datosCorreo;
-  const html= ejs.render(file);
+  const file = fs.readFileSync(resolve("templates/mail-mensaje.html"), "utf-8");
+  const body = JSON.parse(JSON.stringify(req.body)).datosCorreo;
+  const datosHtml = {
+    nombre: data.nombre,
+    email: data.email,
+    asunto: body.asunto,
+    mensaje: data.mensaje,
+  };
+  const html= ejs.render(file, datosHtml);
   const options = {
     to: body.correo,
     cc: body.correosCopia,

@@ -5,12 +5,12 @@ const MailComposer = require("nodemailer/lib/mail-composer");
 const getGmailService = function() {
   const oAuth2Client = new google.auth.OAuth2(
       // eslint-disable-next-line max-len
-      "488929335992-ps346jshfod6n65e2tca4pt8tk0ibsf6.apps.googleusercontent.com",
-      "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",
-      "https://developers.google.com/oauthplayground",
+      process.env.CLIENT_ID_GCP,
+      process.env.CLIENTE_SECRET_GCP,
+      "https://safeservicechile.cl/",
   );
   // eslint-disable-next-line max-len
-  oAuth2Client.setCredentials({refresh_token: "1//04Sg4zK--MLSVCgYIARAAGAQSNwF-L9Ir0Scq-21UXTK2d8HbwWb50RCuYo8eo_VdbU7Yp5waw0ceopFGWURwFES111eR234Jz6Y"});
+  oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN_GCP});
   const gmail = google.gmail({version: "v1", auth: oAuth2Client});
   return gmail;
 };
